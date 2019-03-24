@@ -1,0 +1,15 @@
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\bin\Debug\Tele-ManDesktop.exe.config
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\bin\Debug\Tele-ManDesktop.exe
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\bin\Debug\Tele-ManDesktop.pdb
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\Tele-ManDesktop.csprojAssemblyReference.cache
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\MainWindow.g.cs
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\App.g.cs
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\Tele-ManDesktop_MarkupCompile.cache
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\Tele-ManDesktop_MarkupCompile.lref
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\MainWindow.baml
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\Tele-ManDesktop.g.resources
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\Tele_ManDesktop.Properties.Resources.resources
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\Tele-ManDesktop.csproj.GenerateResource.cache
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\Tele-ManDesktop.csproj.CoreCompileInputs.cache
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\Tele-ManDesktop.exe
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\Tele-ManDesktop.pdb

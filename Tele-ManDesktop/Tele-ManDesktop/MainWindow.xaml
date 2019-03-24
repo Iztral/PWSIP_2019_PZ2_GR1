@@ -1,0 +1,19 @@
+﻿<Window x:Class="Tele_ManDesktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tele_ManDesktop"
+        mc:Ignorable="d"
+        Title="Login-TeleMan Desktop" Height="400" Width="240">
+    <Grid>
+        <Image x:Name="logobox" HorizontalAlignment="Left" Height="200" Margin="10,10,0,0" VerticalAlignment="Top" Width="200"/>
+        <Label x:Name="loginlabel" Content="Login" HorizontalAlignment="Left" Margin="10,215,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="logintxt" HorizontalAlignment="Left" Height="23" Margin="10,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
+        <Label x:Name="passlabel" Content="Password" HorizontalAlignment="Left" Margin="10,274,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="okbutton" Content="OK" HorizontalAlignment="Left" Margin="10,333,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="exitbutton" Content="Exit" HorizontalAlignment="Left" Margin="135,333,0,0" VerticalAlignment="Top" Width="75"/>
+        <PasswordBox x:Name="passwordtxt" HorizontalAlignment="Left" Margin="10,305,0,0" VerticalAlignment="Top" Width="200" Height="23"/>
+
+    </Grid>
+</Window>
