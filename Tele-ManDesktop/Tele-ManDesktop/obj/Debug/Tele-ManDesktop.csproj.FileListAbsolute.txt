@@ -13,3 +13,7 @@ C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\Tele-
 C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\Tele-ManDesktop.csproj.CoreCompileInputs.cache
 C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\Tele-ManDesktop.exe
 C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\Tele-ManDesktop.pdb
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\AdminPanel.g.cs
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\DispatcherPanel.g.cs
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\AdminPanel.baml
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\DispatcherPanel.baml

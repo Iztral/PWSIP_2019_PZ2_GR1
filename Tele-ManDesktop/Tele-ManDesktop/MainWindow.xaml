@@ -11,8 +11,8 @@
         <Label x:Name="loginlabel" Content="Login" HorizontalAlignment="Left" Margin="10,215,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="logintxt" HorizontalAlignment="Left" Height="23" Margin="10,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
         <Label x:Name="passlabel" Content="Password" HorizontalAlignment="Left" Margin="10,274,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="okbutton" Content="OK" HorizontalAlignment="Left" Margin="10,333,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="exitbutton" Content="Exit" HorizontalAlignment="Left" Margin="135,333,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="okbutton" Content="OK" HorizontalAlignment="Left" Margin="10,333,0,0" VerticalAlignment="Top" Width="75" Click="Okbutton_Click"/>
+        <Button x:Name="exitbutton" Content="Exit" HorizontalAlignment="Left" Margin="135,333,0,0" VerticalAlignment="Top" Width="75" Click="Exitbutton_Click"/>
         <PasswordBox x:Name="passwordtxt" HorizontalAlignment="Left" Margin="10,305,0,0" VerticalAlignment="Top" Width="200" Height="23"/>
 
     </Grid>

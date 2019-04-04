@@ -24,5 +24,20 @@ namespace Tele_ManDesktop
         {
             InitializeComponent();
         }
+
+        private void Okbutton_Click(object sender, RoutedEventArgs e)
+        {
+            if (logintxt.Text == "admin")
+                new AdminPanel().Show();
+            else if (logintxt.Text == "dispatcher")
+                new DispatcherPanel().Show();
+            else
+                MessageBox.Show("I am error");
+        }
+
+        private void Exitbutton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
