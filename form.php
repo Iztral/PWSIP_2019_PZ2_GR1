@@ -29,25 +29,20 @@ function test_input($data) {
   return $data;
 }
 
-$nameErr = $surnameErr = $telephoneErr = $addressErr = $cityErr = $descriptionErr = "";
-$name = $surname  = $telephone = $address = $city = $description = "";
+$nameErr = $surnameErr = $telephoneErr = $addressErr = $cityErr = $descriptionErr = $locationErr = $destinationErr= "";
+$name = $surname  = $telephone = $address = $city = $description = $location = $destination = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	
-	if (empty($_POST["phone"])) {
+	if (empty($_POST["location"])) {
     $error = true;
   } else {
-    $phone = test_input($_POST["phone"]);
+    $phone = test_input($_POST["location"]);
   }
-	if (empty($_POST["address"])) {
+	if (empty($_POST["destination"])) {
     $error = true;
   } else {
-    $address = test_input($_POST["address"]);
-  }
-	if (empty($_POST["city"])) {
-    $error = true;
-  } else {
-    $city = test_input($_POST["city"]);
+    $address = test_input($_POST["destination"]);
   }
 	if (empty($_POST["description"])) {
     $error = true;
@@ -55,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = test_input($_POST["description"]);
   }
 	if($error!=true){
-		$query_insert = "INSERT INTO Orders(UserID, Address, Telephone, City, Description, State, CreateDate) VALUES($id, '$address', '$phone', '$city', '$description', 'waiting', CURDATE())";
+		$query_insert = "INSERT INTO Orders(UserID, Location, Destination, Description, State, CreateDate) VALUES($id, '$location', '$destination', , '$description', 'waiting', CURDATE())";
 		$res_insert = mysqli_query($conn, $query_insert);
 		echo(mysqli_error($conn));
 		if ($res_insert) {
@@ -66,12 +61,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$subject = 'Zlecenie';
 			$message = 'Zlecenie zostało złożone' . "\r\n" .
 				'Dane zlecenia: ' . "\r\n" .
-				'	Adres: '.$address."\r\n".
-				'	Miasto: '.$city."\r\n".
-				'	Telefon:'.$phone."\r\n".
+				'	Punkt Startowy: '.$location."\r\n".
+				'	Punkt Dostawy: '.$destination."\r\n".
 				'	Opis: '.$description."\r\n";
-			$headers = 'Od: admin@mfixit.cba.pl' . "\r\n" .
-				'Odpowiedz: admin@mfixit.cba.pl' . "\r\n" .
+			$headers = 'Od: admin@teleman.cba.pl' . "\r\n" .
+				'Odpowiedz: admin@telemant.cba.pl' . "\r\n" .
 				'X-Mailer: PHP/' . phpversion();
 
 			mail($to, $subject, $message, $headers);
@@ -86,7 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Form</title>
+  <title>Formularz</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -115,21 +109,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		<div class="card-body">
 			<form id="usrform" class="form-horizontal" method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" autocomplete="off" >
 					<div class="form-group">
-						<label class="control-label col-sm-2">Telefon:</label>
+						<label class="control-label col-sm-2">Punkt Startowy:</label>
 						<div class="col-sm-10">
-						  <input type="number" pattern="[0-9]" name="phone" maxlength="12" onKeyPress="isNumberKey(event)" class="form-control" required value="<?php echo ($row_data['Telephone']); ?>">
+						  <input type="text" name="location" class="form-control" required value="<?php echo ($row_data['Address']); ?>">
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-sm-2">Adres:</label>
+						<label class="control-label col-sm-2">Punkt Dostawy:</label>
 						<div class="col-sm-10">
-						  <input type="text" name="address" class="form-control" required value="<?php echo ($row_data['Address']); ?>">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-2">Miasto:</label>
-						<div class="col-sm-10">
-						  <input type="text" name="city" class="form-control" required value="<?php echo ($row_data['City']); ?>">
+						  <input type="text" name="destination" class="form-control" required value="<?php echo ($row_data['City']); ?>">
 						</div>
 					</div>
 					<div class="form-group">
