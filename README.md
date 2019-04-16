@@ -3,6 +3,10 @@ Projekt zespołowy 2
 
 ||Aplikacja desktopowa(C# WPF)||
 
+v0.3
+-aplikacja łączy się z XAMPP-ową bazą danych(opartą o stworzony przez zespół skrypt tworzący)
+-podczas logowania następuje weryfikacja danych przez bazę danych
+
 v0.2
 -stworzono panel administratora
 -stworzono panel dyspozytora
