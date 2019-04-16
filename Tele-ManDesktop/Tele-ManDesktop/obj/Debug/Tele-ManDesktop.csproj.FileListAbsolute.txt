@@ -17,3 +17,9 @@ C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\Admin
 C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\DispatcherPanel.g.cs
 C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\AdminPanel.baml
 C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\DispatcherPanel.baml
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\bin\Debug\MySql.Data.dll
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\bin\Debug\MySql.Web.dll
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\bin\Debug\Google.Protobuf.dll
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\bin\Debug\MySql.Data.xml
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\bin\Debug\MySql.Web.xml
+C:\Users\Next\Desktop\zespołowy\Tele-ManDesktop\Tele-ManDesktop\obj\Debug\Tele-ManDesktop.csproj.CopyComplete

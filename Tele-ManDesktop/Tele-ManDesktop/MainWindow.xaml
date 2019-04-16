@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Login-TeleMan Desktop" Height="400" Width="240">
     <Grid>
-        <Image x:Name="logobox" HorizontalAlignment="Left" Height="200" Margin="10,10,0,0" VerticalAlignment="Top" Width="200"/>
+        <Image x:Name="logobox" Source="images\logo.jpg" HorizontalAlignment="Left" Height="200" Margin="10,10,0,0" VerticalAlignment="Top" Width="200"/>
         <Label x:Name="loginlabel" Content="Login" HorizontalAlignment="Left" Margin="10,215,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="logintxt" HorizontalAlignment="Left" Height="23" Margin="10,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200"/>
         <Label x:Name="passlabel" Content="Password" HorizontalAlignment="Left" Margin="10,274,0,0" VerticalAlignment="Top"/>
