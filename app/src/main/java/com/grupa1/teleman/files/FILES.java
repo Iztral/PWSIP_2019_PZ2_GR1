@@ -10,7 +10,6 @@ public class FILES {
     public enum FILE_TYPE {
         CONFIG, LASTLOGIN
     }
-
-    public static final String configPath = MainActivity.startContext.getApplicationInfo().dataDir + "/config.txt";
-    public static final String lastloginPath = MainActivity.startContext.getApplicationInfo().dataDir + "/lastlogin.txt";
+    public static final String configPath = (MainActivity.this).getApplicationContext().getApplicationInfo().dataDir + "/config.txt";
+    public static final String lastloginPath = MainActivity.this.getApplicationContext().getApplicationInfo().dataDir + "/lastlogin.txt";
 }

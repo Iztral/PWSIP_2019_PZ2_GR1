@@ -9,15 +9,33 @@
         android:id="@+id/loginFragment"
         android:name="com.grupa1.teleman.fragments.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_login"
+            app:destination="@id/mainListFragment" />
+        <action
+            android:id="@+id/action_settings"
+            app:destination="@id/settingsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mainListFragment"
         android:name="com.grupa1.teleman.fragments.MainListFragment"
         android:label="fragment_main_list"
-        tools:layout="@layout/fragment_main_list" />
+        tools:layout="@layout/fragment_main_list" >
+        <action
+            android:id="@+id/action_settings"
+            app:destination="@id/settingsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.grupa1.teleman.fragments.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_returnToLogin"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_returnToMain"
+            app:destination="@id/mainListFragment" />
+    </fragment>
 </navigation>
