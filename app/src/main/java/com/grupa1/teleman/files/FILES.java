@@ -10,6 +10,45 @@ public class FILES {
     public enum FILE_TYPE {
         CONFIG, LASTLOGIN
     }
-    public static final String configPath = (MainActivity.this).getApplicationContext().getApplicationInfo().dataDir + "/config.txt";
-    public static final String lastloginPath = MainActivity.this.getApplicationContext().getApplicationInfo().dataDir + "/lastlogin.txt";
+    static final String configPath = MainActivity.currentDir + "/config.txt";
+    static final String lastloginPath = MainActivity.currentDir + "/lastlogin.txt";
+    static final String[] configKeys = new String[] {"databaseAddress", "databasePORT", "databasePASSWORD", "databaseNAME", "databaseUSERNAME"};
+    static final String[] lastLoginKeys = new String[] {"login", "password"};
+    public static String generateEmptyFileContent(FILE_TYPE type){
+        String output = "";
+        switch (type){
+            case CONFIG:{
+                for(int i=0; i<configKeys.length; i++){
+                    output += configKeys[i]+":\n";
+                }
+                break;
+            }
+            case LASTLOGIN: {
+                for(int i=0; i<lastLoginKeys.length; i++){
+                    output += lastLoginKeys[i]+":\n";
+                }
+                break;
+            }
+        }
+        return output;
+    }
+
+    public static String generateFileContent(FILE_TYPE type, String[] args){
+        String output = "";
+        switch (type){
+            case CONFIG:{
+                for(int i=0; i<configKeys.length; i++){
+                    output += configKeys[i]+":" + args[i] + "\n";
+                }
+                break;
+            }
+            case LASTLOGIN: {
+                for(int i=0; i<lastLoginKeys.length; i++){
+                    output += lastLoginKeys[i]+":" + args[i] + "\n";
+                }
+                break;
+            }
+        }
+        return output;
+    }
 }

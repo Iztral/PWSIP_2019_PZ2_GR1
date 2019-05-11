@@ -22,35 +22,33 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/editText"
-            android:layout_width="0dp"
+            android:id="@+id/editText_Address"
+            android:layout_width="277dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:ems="10"
-            android:hint="Adres"
+            android:hint="Adres bazy danych"
             android:inputType="textEmailAddress"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/editText_Password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:ems="10"
-            android:hint="Hasło"
+            android:hint="Hasło do bazy"
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText" />
+            app:layout_constraintTop_toBottomOf="@+id/editText_Address" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/editText_Name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -61,7 +59,7 @@
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText2" />
+            app:layout_constraintTop_toBottomOf="@+id/editText_Password" />
 
         <Button
             android:id="@+id/button_save_exit"
@@ -71,7 +69,7 @@
             android:layout_marginEnd="8dp"
             android:text="Zapisz i\nZamknij"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText3" />
+            app:layout_constraintTop_toBottomOf="@+id/editText_Username" />
 
         <Button
             android:id="@+id/button_exit"
@@ -81,6 +79,44 @@
             android:text="Zamknij"
             app:layout_constraintEnd_toEndOf="@+id/button_save_exit"
             app:layout_constraintTop_toBottomOf="@+id/button_save_exit" />
+
+        <EditText
+            android:id="@+id/editText_Username"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:hint="Nazwa użytkownika"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText_Name" />
+
+        <EditText
+            android:id="@+id/editText_Port"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:hint="Port"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintTop_toTopOf="@+id/editText_Address" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=":"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/editText_Address"
+            app:layout_constraintStart_toEndOf="@+id/editText_Address"
+            app:layout_constraintTop_toTopOf="@+id/editText_Address" />
 
     </android.support.constraint.ConstraintLayout>
 </FrameLayout>

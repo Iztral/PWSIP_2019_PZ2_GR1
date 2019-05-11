@@ -4,14 +4,25 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
+import com.grupa1.teleman.MainActivity;
 import com.grupa1.teleman.R;
+import com.grupa1.teleman.files.ConfigFile;
+import com.grupa1.teleman.files.FILES;
+import com.grupa1.teleman.files.FileOperations;
 
+import androidx.navigation.NavController;
+import androidx.navigation.NavGraph;
+import androidx.navigation.NavInflater;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 
 /**
@@ -23,36 +34,15 @@ import androidx.navigation.Navigation;
  * create an instance of this fragment.
  */
 public class SettingsFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     private View inflatedView;
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private OnFragmentInteractionListener mListener;
+    private ConfigFile config;
 
-    public SettingsFragment() {
-        // Required empty public constructor
-    }
+    public SettingsFragment() { }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SettingsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static SettingsFragment newInstance(String param1, String param2) {
         SettingsFragment fragment = new SettingsFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -60,39 +50,87 @@ public class SettingsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         inflatedView = inflater.inflate(R.layout.fragment_settings, container, false);
+        final Button button_save_exit = inflatedView.findViewById(R.id.button_save_exit);
 
-        Button button_save_exit = inflatedView.findViewById(R.id.button_save_exit);
+        final EditText[] fieldsBundle = new EditText[]
+                {
+                        inflatedView.findViewById(R.id.editText_Address),
+                        inflatedView.findViewById(R.id.editText_Port),
+                        inflatedView.findViewById(R.id.editText_Password),
+                        inflatedView.findViewById(R.id.editText_Name),
+                        inflatedView.findViewById(R.id.editText_Username)
+                };
+
+        button_save_exit.setEnabled(false);
         Button button_exit = inflatedView.findViewById(R.id.button_exit);
+        Bundle args = getArguments();
+
+        if (args != null) {
+            config = args.getParcelable("config");
+            for(int i=0; i<fieldsBundle.length; i++){
+                fieldsBundle[i].setText(config.getDatabase()[i]);
+            }
+        } else {
+            button_exit.setVisibility(View.INVISIBLE);
+        }
+
 
         button_save_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Navigation.findNavController(v).navigate(R.id.action_returnToMain);
+                //TODO: zapis konfiguracji do pliku
+                updateConfig();
+                FileOperations.saveToFile(FILES.FILE_TYPE.CONFIG, config.getDatabase());
+
+                Bundle bundleToSend = new Bundle();
+                bundleToSend.putParcelable("config", config);
+
+                Navigation.findNavController(v).navigate(R.id.action_returnToLogin, bundleToSend);
             }
         });
 
         button_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Navigation.findNavController(v).popBackStack();
+                //Navigation.findNavController(v).navigate(R.id.action_returnToLogin);
             }
         });
+
+
+        TextWatcher watcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                boolean toEnable = true;
+                for(EditText ed : fieldsBundle){
+                    if(ed.getText().toString().equals("")){
+                        toEnable=false;
+                        break;
+                    }
+                }
+                button_save_exit.setEnabled(toEnable);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) { }
+        };
+
+        for (EditText ed : fieldsBundle){
+            ed.addTextChangedListener(watcher);
+        }
 
         return inflatedView;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -116,18 +154,26 @@ public class SettingsFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private void updateConfig(){
+        //TODO: uzupelnic aktualizacje konfiguracji
+
+        final EditText[] fieldsBundle = new EditText[]
+                {
+                        inflatedView.findViewById(R.id.editText_Address),
+                        inflatedView.findViewById(R.id.editText_Port),
+                        inflatedView.findViewById(R.id.editText_Password),
+                        inflatedView.findViewById(R.id.editText_Name),
+                        inflatedView.findViewById(R.id.editText_Username)
+                };
+        String[] data = new String[fieldsBundle.length];
+        for(int i=0; i<fieldsBundle.length; i++){
+            data[i] = fieldsBundle[i].getText().toString();
+        }
+        config = new ConfigFile(data);
     }
 }

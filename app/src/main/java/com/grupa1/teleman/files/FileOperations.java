@@ -4,11 +4,16 @@ import android.os.Environment;
 
 import com.grupa1.teleman.exceptions.NotImplementedException;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class FileOperations {
     public static AppFile getFile(FILES.FILE_TYPE fileEnum){
@@ -20,33 +25,71 @@ public class FileOperations {
         return new AppFile(path, fileEnum);
     }
 
-    public static void openFile(AppFile file){
+    public static boolean checkFile(AppFile file, boolean createFile){
         if(!(file.exists())){
-            try{
-                FileWriter writer = new FileWriter(file);
-                writer.append("databaseAddress:"
-                        + "databasePORT:"
-                        + "databasePASSWORD:"
-                        + "databaseUSERNAME:");
-            } catch (IOException ioEx){
-                ioEx.printStackTrace();
+            if(createFile)
+               createNewFile(file.file_type);
+            return false;
+        }
+        return true;
+    }
+
+    private static boolean createNewFile(FILES.FILE_TYPE fileType) {
+        if (fileType == FILES.FILE_TYPE.CONFIG) {
+            try {
+                FileWriter writer = new FileWriter(getFile(FILES.FILE_TYPE.CONFIG));
+                writer.write(FILES.generateEmptyFileContent(FILES.FILE_TYPE.CONFIG));
+            } catch (Exception ex) {
+                return false;
             }
         }
-
+        return true;
     }
 
-    public ConfigFile readConfigFile(AppFile file){
-        if(file.file_type != FILES.FILE_TYPE.CONFIG) return null;
-        ConfigFile cfg = new ConfigFile(getDataAsArrayList(file));
-        return cfg;
-    }
+    public static String[] readFile(FILES.FILE_TYPE fileType){
+        switch (fileType){
+            case CONFIG:{
+                AppFile file = getFile(FILES.FILE_TYPE.CONFIG);
+                String[] output = new String[FILES.configKeys.length];
+                if (checkFile(file, false)){
+                    try {
+                        BufferedReader reader = new BufferedReader(new FileReader(file));
+                        String currentLine="";
+                        int index=0;
+                        while((currentLine = reader.readLine()) != null){
+                            output[index] = currentLine.substring(currentLine.indexOf(':')+1);
+                            ++index;
+                        }
+                        reader.close();
+                        return output;
+                    } catch (Exception ex){
+                        return null;
+                    }
+                }
+                else return null;
+            }
+            case LASTLOGIN:{
 
-    private ArrayList<String> getDataAsArrayList(AppFile file){
-        ArrayList<String> dataList = new ArrayList<>();
-        while(true){
-
-            break;
+            }
+            default: return null;
         }
-        return dataList;
+    }
+
+    public static void saveToFile(FILES.FILE_TYPE fileType, String[] data){
+        switch(fileType){
+            case CONFIG:{
+                try {
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(getFile(FILES.FILE_TYPE.CONFIG)));
+                    writer.write(FILES.generateFileContent(fileType, data));
+                    //for(int i=0; i<FILES.configKeys.length; i++){
+                    //    writer.append(String.format("%s:%s\n", FILES.configKeys[i], data[i]));
+                    //}
+                    writer.close();
+                } catch (Exception ex){
+                    ex.printStackTrace();
+                }
+                break;
+            }
+        }
     }
 }

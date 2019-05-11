@@ -21,11 +21,7 @@
         android:id="@+id/mainListFragment"
         android:name="com.grupa1.teleman.fragments.MainListFragment"
         android:label="fragment_main_list"
-        tools:layout="@layout/fragment_main_list" >
-        <action
-            android:id="@+id/action_settings"
-            app:destination="@id/settingsFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_main_list" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.grupa1.teleman.fragments.SettingsFragment"
@@ -34,8 +30,14 @@
         <action
             android:id="@+id/action_returnToLogin"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/noConfigPrompt"
+        android:name="com.grupa1.teleman.fragments.NoConfigPrompt"
+        android:label="fragment_no_config_prompt"
+        tools:layout="@layout/fragment_no_config_prompt" >
         <action
-            android:id="@+id/action_returnToMain"
-            app:destination="@id/mainListFragment" />
+            android:id="@+id/action_noConfigPrompt_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
 </navigation>
