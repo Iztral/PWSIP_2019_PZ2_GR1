@@ -37,12 +37,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if (empty($_POST["location"])) {
     $error = true;
   } else {
-    $phone = test_input($_POST["location"]);
+    $location = test_input($_POST["location"]);
   }
 	if (empty($_POST["destination"])) {
     $error = true;
   } else {
-    $address = test_input($_POST["destination"]);
+    $destination = test_input($_POST["destination"]);
   }
 	if (empty($_POST["description"])) {
     $error = true;
@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $description = test_input($_POST["description"]);
   }
 	if($error!=true){
-		$query_insert = "INSERT INTO Orders(UserID, Location, Destination, Description, State, CreateDate) VALUES($id, '$location', '$destination', , '$description', 'waiting', CURDATE())";
+		$query_insert = "INSERT INTO Orders(UserID, Location, Destination, Description, State, CreateDate) VALUES($id, '$location', '$destination', '$description', 'waiting', CURDATE());";
 		$res_insert = mysqli_query($conn, $query_insert);
 		echo(mysqli_error($conn));
 		if ($res_insert) {
@@ -111,13 +111,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					<div class="form-group">
 						<label class="control-label col-sm-2">Punkt Startowy:</label>
 						<div class="col-sm-10">
-						  <input type="text" name="location" class="form-control" required value="<?php echo ($row_data['Address']); ?>">
+						  <input type="text" name="location" form="usrform" class="form-control" required value="<?php echo ($row_data['Address']. ', ' .$row_data['City']); ?>">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-sm-2">Punkt Dostawy:</label>
 						<div class="col-sm-10">
-						  <input type="text" name="destination" class="form-control" required value="<?php echo ($row_data['City']); ?>">
+						  <input type="text" name="destination" form="usrform" class="form-control">
 						</div>
 					</div>
 					<div class="form-group">
