@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.grupa1.teleman.MainActivity;
 import com.grupa1.teleman.R;
 
 import androidx.navigation.Navigation;
@@ -24,12 +23,9 @@ import androidx.navigation.Navigation;
  * create an instance of this fragment.
  */
 public class NoConfigPrompt extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -40,15 +36,6 @@ public class NoConfigPrompt extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment NoConfigPrompt.
-     */
-    // TODO: Rename and change types and number of parameters
     public static NoConfigPrompt newInstance(String param1, String param2) {
         NoConfigPrompt fragment = new NoConfigPrompt();
         Bundle args = new Bundle();
@@ -71,7 +58,7 @@ public class NoConfigPrompt extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        if(oListener != null)
+        if (oListener != null)
             oListener.onFragmentCreate();
 
         View inflatedView = inflater.inflate(R.layout.fragment_no_config_prompt, container, false);
@@ -86,7 +73,6 @@ public class NoConfigPrompt extends Fragment {
         return inflatedView;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -98,7 +84,7 @@ public class NoConfigPrompt extends Fragment {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
-        } else if(context instanceof OnFragmentCreateListener){
+        } else if (context instanceof OnFragmentCreateListener) {
             oListener = (OnFragmentCreateListener) context;
         } else {
             throw new RuntimeException(context.toString()
@@ -113,21 +99,11 @@ public class NoConfigPrompt extends Fragment {
         oListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
 
-    public interface OnFragmentCreateListener{
+    public interface OnFragmentCreateListener {
         void onFragmentCreate();
     }
 }

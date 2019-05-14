@@ -1,7 +1,5 @@
 package com.grupa1.teleman.files;
 
-import android.app.Application;
-
 import java.io.File;
 import java.net.URI;
 

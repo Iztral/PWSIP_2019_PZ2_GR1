@@ -12,17 +12,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.grupa1.teleman.MainActivity;
 import com.grupa1.teleman.R;
-import com.grupa1.teleman.files.ConfigFile;
+import com.grupa1.teleman.files.ConnectionConfig;
 import com.grupa1.teleman.files.FILES;
 import com.grupa1.teleman.files.FileOperations;
 
-import androidx.navigation.NavController;
-import androidx.navigation.NavGraph;
-import androidx.navigation.NavInflater;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 
 
 /**
@@ -36,9 +31,10 @@ import androidx.navigation.fragment.NavHostFragment;
 public class SettingsFragment extends Fragment {
     private View inflatedView;
     private OnFragmentInteractionListener mListener;
-    private ConfigFile config;
+    private ConnectionConfig config;
 
-    public SettingsFragment() { }
+    public SettingsFragment() {
+    }
 
     public static SettingsFragment newInstance(String param1, String param2) {
         SettingsFragment fragment = new SettingsFragment();
@@ -73,7 +69,7 @@ public class SettingsFragment extends Fragment {
 
         if (args != null) {
             config = args.getParcelable("config");
-            for(int i=0; i<fieldsBundle.length; i++){
+            for (int i = 0; i < fieldsBundle.length; i++) {
                 fieldsBundle[i].setText(config.getDatabase()[i]);
             }
         } else {
@@ -84,7 +80,6 @@ public class SettingsFragment extends Fragment {
         button_save_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: zapis konfiguracji do pliku
                 updateConfig();
                 FileOperations.saveToFile(FILES.FILE_TYPE.CONFIG, config.getDatabase());
 
@@ -99,21 +94,21 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Navigation.findNavController(v).popBackStack();
-                //Navigation.findNavController(v).navigate(R.id.action_returnToLogin);
             }
         });
 
 
         TextWatcher watcher = new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 boolean toEnable = true;
-                for(EditText ed : fieldsBundle){
-                    if(ed.getText().toString().equals("")){
-                        toEnable=false;
+                for (EditText ed : fieldsBundle) {
+                    if (ed.getText().toString().equals("")) {
+                        toEnable = false;
                         break;
                     }
                 }
@@ -121,10 +116,11 @@ public class SettingsFragment extends Fragment {
             }
 
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         };
 
-        for (EditText ed : fieldsBundle){
+        for (EditText ed : fieldsBundle) {
             ed.addTextChangedListener(watcher);
         }
 
@@ -155,13 +151,10 @@ public class SettingsFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
-    private void updateConfig(){
-        //TODO: uzupelnic aktualizacje konfiguracji
-
+    private void updateConfig() {
         final EditText[] fieldsBundle = new EditText[]
                 {
                         inflatedView.findViewById(R.id.editText_Address),
@@ -171,9 +164,9 @@ public class SettingsFragment extends Fragment {
                         inflatedView.findViewById(R.id.editText_Username)
                 };
         String[] data = new String[fieldsBundle.length];
-        for(int i=0; i<fieldsBundle.length; i++){
+        for (int i = 0; i < fieldsBundle.length; i++) {
             data[i] = fieldsBundle[i].getText().toString();
         }
-        config = new ConfigFile(data);
+        config = new ConnectionConfig(data);
     }
 }

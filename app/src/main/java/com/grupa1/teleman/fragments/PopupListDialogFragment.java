@@ -14,21 +14,11 @@ import android.widget.TextView;
 
 import com.grupa1.teleman.R;
 
-/**
- * <p>A fragment that shows a list of items as a modal bottom sheet.</p>
- * <p>You can show this modal bottom sheet from your activity like this:</p>
- * <pre>
- *     PopupListDialogFragment.newInstance(30).show(getSupportFragmentManager(), "dialog");
- * </pre>
- * <p>You activity (or fragment) needs to implement {@link PopupListDialogFragment.Listener}.</p>
- */
 public class PopupListDialogFragment extends BottomSheetDialogFragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_ITEM_COUNT = "item_count";
     private Listener mListener;
 
-    // TODO: Customize parameters
     public static PopupListDialogFragment newInstance(int itemCount) {
         final PopupListDialogFragment fragment = new PopupListDialogFragment();
         final Bundle args = new Bundle();
@@ -77,7 +67,6 @@ public class PopupListDialogFragment extends BottomSheetDialogFragment {
         final TextView text;
 
         ViewHolder(LayoutInflater inflater, ViewGroup parent) {
-            // TODO: Customize the item layout
             super(inflater.inflate(R.layout.fragment_popup_list_dialog_item, parent, false));
             text = (TextView) itemView.findViewById(R.id.text);
             text.setOnClickListener(new View.OnClickListener() {

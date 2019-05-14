@@ -3,10 +3,8 @@ package com.grupa1.teleman;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.Toast;
 
-import com.grupa1.teleman.files.ConfigFile;
+import com.grupa1.teleman.files.ConnectionConfig;
 import com.grupa1.teleman.files.FileOperations;
 import com.grupa1.teleman.fragments.LoginFragment;
 import com.grupa1.teleman.fragments.MainListFragment;
@@ -22,7 +20,7 @@ import static com.grupa1.teleman.files.FILES.FILE_TYPE.CONFIG;
 
 public class MainActivity extends AppCompatActivity implements LoginFragment.OnFragmentInteractionListener, SettingsFragment.OnFragmentInteractionListener, MainListFragment.OnFragmentInteractionListener, NoConfigPrompt.OnFragmentInteractionListener, NoConfigPrompt.OnFragmentCreateListener{
     public static String currentDir;
-    public static ConfigFile config;
+    public static ConnectionConfig config;
     private static NavGraph graph;
     private static NavController navController;
 
@@ -33,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
         getSupportActionBar().hide();
 
         currentDir = this.getApplicationContext().getApplicationInfo().dataDir;
-        config = new ConfigFile(FileOperations.readFile(CONFIG));
+        config = new ConnectionConfig(FileOperations.readFile(CONFIG));
 
         NavHostFragment navHost = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
         navController = navHost.getNavController();
