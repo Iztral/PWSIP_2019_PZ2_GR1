@@ -3,6 +3,9 @@ Projekt zespołowy 2
 
 ||Aplikacja desktopowa(C# Forms)||
 
+v1.1
+-dodano brakujące pole edycyjne CarID w formularzu do dodania nowego użytkownika w AdminPanel
+
 v1.0
 -aplikacja łączy się z bazą danych serwisu(teleman.cba.pl)
 -panel dyspozytora(przeglądanie nowych i przypisanych zleceń, historia zleceń, przypisywanie nowych zleceń kierowcom, usuwanie niepoprawnych zleceń)
