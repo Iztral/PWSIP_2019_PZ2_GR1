@@ -34,5 +34,6 @@ dependencies {
     implementation "org.jetbrains.anko:anko-sdk25:$anko_version"
     implementation "org.jetbrains.anko:anko-appcompat-v7:$anko_version"
     implementation "com.android.support:design:$design_version"
-    implementation files('mysql-connector-java-8.0.16.jar')
+    implementation files('mysql-connector-java-8.0.12.jar')
+    implementation files('mariadb-java-client-2.4.1.jar')
 }

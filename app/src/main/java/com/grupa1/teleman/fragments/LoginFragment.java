@@ -77,17 +77,16 @@ public class LoginFragment extends Fragment {
             connCfg = new ConnectionConfig(FileOperations.readFile(CONFIG));
         }
 
-        connection = new JdbcConnection(
-                connCfg.getDatabaseAddress(),
-                connCfg.getDatabasePort(),
-                connCfg.getDatabaseName(),
-                connCfg.getDatabaseUsername(),
-                connCfg.getDatabasePassword());
-
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO: mechanika logowania
+                connection = new JdbcConnection(
+                        connCfg.getDatabaseAddress(),
+                        connCfg.getDatabasePort(),
+                        connCfg.getDatabaseName(),
+                        connCfg.getDatabaseUsername(),
+                        connCfg.getDatabasePassword());
                 ResultSet response = connection.executeQuery(String.format("SELECT ID FROM Users u WHERE (u.Login=%s OR u.Email=%s) AND u.Password=%s AND u.Rank=driver",
                         editText_login.getText().toString(), editText_login.getText().toString(), editText_password.getText().toString()));
                 try {
