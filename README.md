@@ -3,6 +3,9 @@ Projekt zespołowy 2
 
 ||Aplikacja desktopowa(C# Forms)||
 
+v1.2
+-poprawki blędów
+
 v1.1
 -dodano brakujące pole edycyjne CarID w formularzu do dodania nowego użytkownika w AdminPanel
 
