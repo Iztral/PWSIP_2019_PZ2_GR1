@@ -28,7 +28,7 @@ session_start();
 <header class="bg-primary text-white">
 	<div class="container text-center">
 	  <h1>TeleMan</h1>
-	  <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero odio fugiat voluptatem dolor, provident officiis, id iusto! Obcaecati incidunt, qui nihil beatae magnam et repudiandae ipsa exercitationem, in, quo totam.</p>
+	  <p class="lead">Witamy w serwisie Teleman - nowoczesnym systemie do obsługi transportu online!</p>
 	</div>
 </header>
   
@@ -37,12 +37,12 @@ session_start();
       <div class="row">
         <div class="col-lg-8 mx-auto">
           <h2>O nas</h2>
-          <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero odio fugiat voluptatem dolor, provident officiis, id iusto! Obcaecati incidunt, qui nihil beatae magnam et repudiandae ipsa exercitationem, in, quo totam:</p>
+          <p class="lead">Jesteśmy prężnie rozwijającą się firmą posiadającą nowoczesny system zarządzania transportem. Atuty naszego systemu to:</p>
           <ul>
-            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non. </li>
-            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non. </li>
-            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non. </li>
-            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non. </li>
+            <li>niezawodność </li>
+            <li>szybkość działania </li>
+            <li>dokładność </li>
+            <li>intuicyjność </li>
           </ul>
         </div>
       </div>
@@ -54,7 +54,7 @@ session_start();
       <div class="row">
         <div class="col-lg-8 mx-auto">
           <h2>Nasze Usługi</h2>
-          <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut optio velit inventore, expedita quo laboriosam possimus ea consequatur vitae, doloribus consequuntur ex. Nemo assumenda laborum vel, labore ut velit dignissimos.</p>
+          <p class="lead">Dostarczamy szeroki wachlarz usług online dla zarządzania transportem.</p>
         </div>
       </div>
     </div>
