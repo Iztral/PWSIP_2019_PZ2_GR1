@@ -68,7 +68,7 @@ public class SettingsFragment extends Fragment {
         Bundle args = getArguments();
 
         if (args != null) {
-            config = args.getParcelable("config");
+            config = args.getParcelable("connCfg");
             for (int i = 0; i < fieldsBundle.length; i++) {
                 fieldsBundle[i].setText(config.getDatabase()[i]);
             }

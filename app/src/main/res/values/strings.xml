@@ -1,5 +1,33 @@
 <resources>
     <string name="app_name">TELEMAN</string>
+    <string name="task_number">XX</string>
+    <string-array name="task_state">
+        <item name="default_0">state</item>
+        <item name="waiting_1">oczekujące</item>
+        <item name="ongoing_2">w trakcie</item>
+        <item name="suspended_3">przerwane</item>
+        <item name="success_4">powodzenie</item>
+        <item name="failed_5">niepowodzenie</item>
+    </string-array>
+    <string name="task_message">DOMYŚLNY_ZAPYCHACZ</string>
+    <string-array name="button_state">
+        <item name="default_0">button_state</item>
+        <item name="take_1">przyjmij</item>
+        <item name="end_2">zakończ</item>
+        <item name="resume_3">wznów</item>
+    </string-array>
+    <string-array name="other_task_ongoing">
+        <item name="part_1">Zlecenie nr</item>
+        <item name="part_2">jest w tej chwili wykonywane. Czy chcesz je zawiesić i aktywować wybrane zlecenie?</item>
+    </string-array>
 
+    <string-array name="sql_taskstate">
+        <item name="not_set_0">not_set</item>
+        <item name="waiting_1">waiting</item>
+        <item name="ongoing_2">ongoing</item>
+        <item name="suspended_3">suspend</item>
+        <item name="success_4">success</item>
+        <item name="failed_5">failed</item>
+    </string-array>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

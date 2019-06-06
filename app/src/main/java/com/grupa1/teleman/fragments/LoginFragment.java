@@ -9,34 +9,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.grupa1.teleman.MainActivity;
 import com.grupa1.teleman.R;
 import com.grupa1.teleman.files.ConnectionConfig;
 import com.grupa1.teleman.files.FileOperations;
-import com.grupa1.teleman.networking.JdbcConnection;
-import com.grupa1.teleman.networking.RunningConfig;
+import com.grupa1.teleman.networking.*;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import androidx.navigation.Navigation;
 
 import static com.grupa1.teleman.files.FILES.FILE_TYPE.CONFIG;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link LoginFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link LoginFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class LoginFragment extends Fragment {
     private View inflatedView;
     private ConnectionConfig connCfg;
-    private JdbcConnection connection;
+    private static JdbcConnection connection;
     private RunningConfig runnCfg;
 
     private OnFragmentInteractionListener mListener;
@@ -77,28 +67,32 @@ public class LoginFragment extends Fragment {
             connCfg = new ConnectionConfig(FileOperations.readFile(CONFIG));
         }
 
+        runnCfg = new RunningConfig();
+
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //TODO: mechanika logowania
+                connCfg = new ConnectionConfig(FileOperations.readFile(CONFIG));
                 connection = new JdbcConnection(
                         connCfg.getDatabaseAddress(),
                         connCfg.getDatabasePort(),
                         connCfg.getDatabaseName(),
                         connCfg.getDatabaseUsername(),
                         connCfg.getDatabasePassword());
-                ResultSet response = connection.executeQuery(String.format("SELECT ID FROM Users u WHERE (u.Login=%s OR u.Email=%s) AND u.Password=%s AND u.Rank=driver",
+                ResultSet response = connection.executeQuery(String.format("SELECT ID FROM Users u WHERE (u.Login='%s' OR u.Email='%s') AND u.Password='%s' AND u.Rank='driver'",
                         editText_login.getText().toString(), editText_login.getText().toString(), editText_password.getText().toString()));
                 try {
-                    if (response.getFetchSize() != 0) {
+                    if (response!=null) {
                         response.next();
                         runnCfg.setClientID(response.getInt("ID"));
                         Navigation.findNavController(v).navigate(R.id.action_login);
                     }
                     else{
-
+                        Toast.makeText(MainActivity.getAppContext(), "Niepoprawne dane", Toast.LENGTH_LONG).show();
                     }
                 } catch (Exception ex){
+                    Toast.makeText(MainActivity.getAppContext(), "Nie udało się połączyć z bazą danych", Toast.LENGTH_LONG).show();
                     ex.printStackTrace();
                 }
 
@@ -137,5 +131,7 @@ public class LoginFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-
+    public static JdbcConnection getConnection(){
+        return connection;
+    }
 }

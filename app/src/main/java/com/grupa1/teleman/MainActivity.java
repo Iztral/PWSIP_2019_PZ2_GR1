@@ -1,5 +1,6 @@
 package com.grupa1.teleman;
 
+import android.content.Context;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +24,11 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
     public static ConnectionConfig config;
     private static NavGraph graph;
     private static NavController navController;
+    private static  MainActivity app;
+
+    public static Context getAppContext(){
+        return app;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.OnF
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
+        app = this;
         currentDir = this.getApplicationContext().getApplicationInfo().dataDir;
         config = new ConnectionConfig(FileOperations.readFile(CONFIG));
 
