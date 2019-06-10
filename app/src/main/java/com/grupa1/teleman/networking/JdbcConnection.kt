@@ -2,6 +2,7 @@ package com.grupa1.teleman.networking
 
 import android.widget.Toast
 import com.grupa1.teleman.MainActivity
+import com.grupa1.teleman.files.ConnectionConfig
 import org.jetbrains.anko.*
 import org.jetbrains.anko.custom.async
 import java.sql.Connection
@@ -11,6 +12,13 @@ import java.sql.SQLException
 
 open class JdbcConnection(IP: String, PORT: String, database: String, username: String, password: String) {
     var connection: Connection? = null
+
+    constructor(connCfg: ConnectionConfig) : this(
+            connCfg.databaseAddress,
+            connCfg.databasePort,
+            connCfg.databaseName,
+            connCfg.databaseUsername,
+            connCfg.databasePassword)
 
     init {
         try {
@@ -31,6 +39,7 @@ open class JdbcConnection(IP: String, PORT: String, database: String, username: 
         }
 
     }
+
 
     val isConnectionOpenned: Boolean
         get() {

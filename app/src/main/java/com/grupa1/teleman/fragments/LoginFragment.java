@@ -17,6 +17,7 @@ import com.grupa1.teleman.files.ConnectionConfig;
 import com.grupa1.teleman.files.FileOperations;
 import com.grupa1.teleman.networking.*;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 
 import androidx.navigation.Navigation;
@@ -25,9 +26,9 @@ import static com.grupa1.teleman.files.FILES.FILE_TYPE.CONFIG;
 
 public class LoginFragment extends Fragment {
     private View inflatedView;
-    private ConnectionConfig connCfg;
+    public static ConnectionConfig connCfg;
     private static JdbcConnection connection;
-    private RunningConfig runnCfg;
+    private static RunningConfig runnCfg;
 
     private OnFragmentInteractionListener mListener;
 
@@ -73,26 +74,31 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //TODO: mechanika logowania
-                connCfg = new ConnectionConfig(FileOperations.readFile(CONFIG));
-                connection = new JdbcConnection(
-                        connCfg.getDatabaseAddress(),
-                        connCfg.getDatabasePort(),
-                        connCfg.getDatabaseName(),
-                        connCfg.getDatabaseUsername(),
-                        connCfg.getDatabasePassword());
+                ConnectionConfig tempCfg = new ConnectionConfig(FileOperations.readFile(CONFIG));
+                if(connection==null || tempCfg!=connCfg) {
+                    connCfg=tempCfg;
+                    try {
+                        connection = new JdbcConnection(connCfg);
+                    } catch (Exception ex){
+                        Toast.makeText(MainActivity.getAppContext(), "Nie udało się połączyć z bazą danych", Toast.LENGTH_LONG).show();
+                        ex.printStackTrace();
+                        return;
+                    }
+                }
                 ResultSet response = connection.executeQuery(String.format("SELECT ID FROM Users u WHERE (u.Login='%s' OR u.Email='%s') AND u.Password='%s' AND u.Rank='driver'",
                         editText_login.getText().toString(), editText_login.getText().toString(), editText_password.getText().toString()));
                 try {
                     if (response!=null) {
                         response.next();
                         runnCfg.setClientID(response.getInt("ID"));
+                        MainActivity.connection = connection;
                         Navigation.findNavController(v).navigate(R.id.action_login);
                     }
                     else{
-                        Toast.makeText(MainActivity.getAppContext(), "Niepoprawne dane", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.getAppContext(), "Niepoprawne dane", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception ex){
-                    Toast.makeText(MainActivity.getAppContext(), "Nie udało się połączyć z bazą danych", Toast.LENGTH_LONG).show();
+
                     ex.printStackTrace();
                 }
 
@@ -134,4 +140,5 @@ public class LoginFragment extends Fragment {
     public static JdbcConnection getConnection(){
         return connection;
     }
+    public static RunningConfig getRunnCfg(){return runnCfg;}
 }

@@ -19,6 +19,8 @@ import com.grupa1.teleman.files.FileOperations;
 
 import androidx.navigation.Navigation;
 
+import static com.grupa1.teleman.files.FILES.FILE_TYPE.CONFIG;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,9 +71,15 @@ public class SettingsFragment extends Fragment {
 
         if (args != null) {
             config = args.getParcelable("connCfg");
-            for (int i = 0; i < fieldsBundle.length; i++) {
-                fieldsBundle[i].setText(config.getDatabase()[i]);
-            }
+
+                for (int i = 0; i < fieldsBundle.length; i++) {
+                    try {
+                    fieldsBundle[i].setText(config.getDatabase()[i]);
+                    }catch (NullPointerException npe){
+                        config = new ConnectionConfig(FileOperations.readFile(CONFIG));
+                        i--;
+                    }
+                }
         } else {
             button_exit.setVisibility(View.INVISIBLE);
         }

@@ -72,7 +72,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clientAddress_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/destination_textView" />
 
     <TextView
         android:id="@+id/textView2"
@@ -85,7 +85,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
-        android:id="@+id/clientUsername_textView"
+        android:id="@+id/location_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="CLIENT_USERNAME"
@@ -100,14 +100,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        android:text="Gdzie: "
+        android:text="Do: "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
-        android:id="@+id/clientAddress_textView"
+        android:id="@+id/destination_textView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="16dp"
         android:text="CLIENT_ADDRESS"
         android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Subtitle"
         android:textSize="14sp"
