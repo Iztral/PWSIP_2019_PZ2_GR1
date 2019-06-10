@@ -111,6 +111,7 @@
   <ItemGroup>
     <Content Include="Resources\logo2.JPG" />
     <Content Include="Resources\logo.jpg" />
+    <Content Include="Resources\telemanlogo.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

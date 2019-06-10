@@ -23,7 +23,8 @@ namespace TeleManDesktop
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            connectionString = "SERVER=teleman.cba.pl;USERNAME=teleman;PASSWORD=Hasloteleman1;DATABASE=teleman;SslMode=none;Convert Zero Datetime=true";
+            //connectionString = "SERVER=teleman.cba.pl;USERNAME=teleman;PASSWORD=Hasloteleman1;DATABASE=teleman;SslMode=none;Convert Zero Datetime=true";
+            connectionString = "SERVER=mn14.webd.pl;USERNAME=teleman1_new;PASSWORD=haslo1234;DATABASE=teleman1_teleman;SslMode=none;Convert Zero Datetime=true";
             connection = new MySqlConnection(connectionString);
         }
 

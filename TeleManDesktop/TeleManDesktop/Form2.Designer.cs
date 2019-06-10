@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
             this.contextMenuStrip4 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.refreshToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -61,12 +62,12 @@
             this.contextMenuStrip4.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.refreshToolStripMenuItem3});
             this.contextMenuStrip4.Name = "contextMenuStrip4";
-            this.contextMenuStrip4.Size = new System.Drawing.Size(181, 48);
+            this.contextMenuStrip4.Size = new System.Drawing.Size(114, 26);
             // 
             // refreshToolStripMenuItem3
             // 
             this.refreshToolStripMenuItem3.Name = "refreshToolStripMenuItem3";
-            this.refreshToolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.refreshToolStripMenuItem3.Size = new System.Drawing.Size(113, 22);
             this.refreshToolStripMenuItem3.Text = "Refresh";
             this.refreshToolStripMenuItem3.Click += new System.EventHandler(this.refreshToolStripMenuItem3_Click);
             // 
@@ -82,21 +83,21 @@
             // deleteToolStripMenuItem
             // 
             this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // assignToToolStripMenuItem1
             // 
             this.assignToToolStripMenuItem1.Name = "assignToToolStripMenuItem1";
-            this.assignToToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.assignToToolStripMenuItem1.Size = new System.Drawing.Size(132, 22);
             this.assignToToolStripMenuItem1.Text = "Assign to...";
             this.assignToToolStripMenuItem1.Click += new System.EventHandler(this.assignToToolStripMenuItem1_Click);
             // 
             // refreshToolStripMenuItem
             // 
             this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.refreshToolStripMenuItem.Text = "Refresh";
             this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
             // 
@@ -110,7 +111,7 @@
             // refreshToolStripMenuItem1
             // 
             this.refreshToolStripMenuItem1.Name = "refreshToolStripMenuItem1";
-            this.refreshToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.refreshToolStripMenuItem1.Size = new System.Drawing.Size(113, 22);
             this.refreshToolStripMenuItem1.Text = "Refresh";
             this.refreshToolStripMenuItem1.Click += new System.EventHandler(this.refreshToolStripMenuItem1_Click);
             // 
@@ -212,6 +213,7 @@
             // 
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form2";
             this.Text = "TeleMan";
             this.contextMenuStrip4.ResumeLayout(false);
