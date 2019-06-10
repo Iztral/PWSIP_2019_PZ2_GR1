@@ -3,6 +3,11 @@ Projekt zespołowy 2
 
 ||Aplikacja desktopowa(C# Forms)||
 
+v1.3
+-dodano logo główne oraz ikonki
+-aktualizacja connectionString
+-poprawki błędów
+
 v1.2
 -poprawki blędów
 
