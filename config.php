@@ -1,10 +1,10 @@
 <?php
 error_reporting( ~E_DEPRECATED & ~E_NOTICE );
 
-define("HOST", "mysql.cba.pl");
-define("USER", "teleman");
-define("PASS", "Hasloteleman1");
-define("DATABASE", "teleman");
+define("HOST", "mn14.webd.pl");
+define("USER", "teleman1_new");
+define("PASS", "haslo1234");
+define("DATABASE", "teleman1_teleman");
 
 $conn = mysqli_connect(HOST, USER, PASS, DATABASE);
 
