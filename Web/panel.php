@@ -20,7 +20,7 @@ $login = $row_user['Login'];
 
 //get OrderData
 $order_array = array();
-$query_orders = "SELECT Description, State, CreateDate, ModificationDate FROM Orders WHERE UserID='$id' ORDER BY ID ASC;";
+$query_orders = "SELECT ID, Description, State, CreateDate, ModificationDate FROM Orders WHERE UserID='$id' ORDER BY ID ASC;";
 $res_orders=mysqli_query($conn, $query_orders);
 echo(mysqli_error($conn));
 while ($row = $res_orders->fetch_assoc())
@@ -47,7 +47,7 @@ $name = $surname= $phone = $address = $city = "";
 
 $error = false;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
 	if (empty($_POST["name"])) {
     $nameErr = "Can't be empty";
 	$error = true;
@@ -86,14 +86,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if ($res_update) {
 			$errTyp = "success";
 			$errMSG = "Data successfully edited.";
+			header("location: panel.php");
 		} else {
 			$errTyp = "danger";
 			$errMSG = "Something went wrong, try again later...";
 			echo($conn->error);
 		}
 	}
+	
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['result']) && isset($_POST['order_id'])){
+	$state = $_POST["result"];
+	$order_id = $_POST["order_id"];
+	$query_update = "UPDATE Orders SET State = '$state', ModificationDate = CURDATE() WHERE ID = '$order_id'";
+		$res_update = mysqli_query($conn, $query_update);
+		echo(mysqli_error($conn));
+
+		if ($res_update) {
+			$errTyp = "success";
+			$errMSG = "Data successfully edited.";
+			header("location: panel.php");
+		} else {
+			$errTyp = "danger";
+			$errMSG = "Something went wrong, try again later...";
+			echo($conn->error);
+		}
+	
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -150,6 +170,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 								<br>Opis: <?php echo($order["Description"])?>
 								<br>Data złożenia: <?php echo($order["CreateDate"])?>
 								<br>Data modyfikacji: <?php echo($order["ModificationDate"])?>
+								<br>Zakończ zlecenie:
+								<form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+									<select name="result">
+										<option value="failed">Niedostarczono</option>
+										<option value="success">Dostarczono</option>
+									</select>
+									<input name="order_id" type="number" readonly value="<?php echo($order["ID"])?>" style="display: none">
+									<input type="submit" value="Zakończ">
+								</form>
 							</div>
 						</div>
 					<?php }?>
