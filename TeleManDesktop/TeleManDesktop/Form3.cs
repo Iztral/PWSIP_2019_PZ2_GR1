@@ -55,7 +55,7 @@ namespace TeleManDesktop
             }
             if (tabControl1.SelectedTab.Text == "Users")
             {
-                MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT * FROM Users", connection);
+                MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT ID, Login, Email, `Rank`, CarID FROM Users", connection);
                 DataSet dataset = new DataSet();
                 dataadapter.Fill(dataset, "Users");
                 dataGridView3.DataSource = dataset;

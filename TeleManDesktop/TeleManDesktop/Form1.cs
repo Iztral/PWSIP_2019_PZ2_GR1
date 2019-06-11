@@ -30,6 +30,7 @@ namespace TeleManDesktop
 
         private void button1_Click(object sender, EventArgs e)
         {
+
             string r = null;
 
             if (connection.State == ConnectionState.Closed) connection.Open();
