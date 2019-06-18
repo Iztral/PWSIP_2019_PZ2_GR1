@@ -67,6 +67,7 @@ if ( isset($_POST['btn-signup']) ) {
 	$password = $pass;
 
 	if( !$error ) {
+        $password = hash('sha256',$password);
 		$query = "INSERT INTO Users(Login, Email, Password, Rank) VALUES('$login','$email','$password', 'user')";
 		$res = mysqli_query($conn, $query);
 
