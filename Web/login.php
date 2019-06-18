@@ -37,13 +37,12 @@ if( isset($_POST['btn-login']) ) {
 	}
 
 	if (!$error) {
-		//$password = hash('sha256', $pass);
-		$password = $pass;
+        $password = hash('sha256',$pass);
 		$query = "SELECT ID, Login, Password, Rank FROM Users WHERE Email='$email'";
 		$res=mysqli_query($conn, $query);
 		$row=mysqli_fetch_array($res);
 		$count = mysqli_num_rows($res);
-		if( $count == 1 && password_verify($password, $row['Password']) && $row['Rank'] == "user") {
+		if( $count == 1 && $password == $row['Password'] && $row['Rank'] == "user") {
 			$_SESSION['user'] = $row['ID'];
 			header("Location: index.php");
 		} else {
