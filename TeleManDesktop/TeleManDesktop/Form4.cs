@@ -13,7 +13,7 @@ namespace TeleManDesktop
 {
     public partial class Form4 : Form
     {
-        int did;
+        public int did;
         public Form4(MySqlConnection connection)
         {
             InitializeComponent();

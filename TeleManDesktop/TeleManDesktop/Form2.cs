@@ -18,26 +18,10 @@ namespace TeleManDesktop
         {
             this.connection = connection;
             InitializeComponent();
-            listorders();
+            populateNew();
         }
 
         MySqlConnection connection;
-
-        private void listorders()
-        {
-            if (connection.State == ConnectionState.Closed) connection.Open();
-            MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT ID, Description, CreateDate, Location, Destination FROM Orders WHERE State = 'waiting' AND ModificationDate IS NULL", connection);
-            DataSet dataset = new DataSet();
-            dataadapter.Fill(dataset, "Orders");
-            dataGridView1.DataSource = dataset;
-            dataGridView1.DataMember = "Orders";
-            dataGridView1.Focus();
-            /*MySqlDataAdapter listserv = new MySqlDataAdapter("SELECT ID FROM Users WHERE `Rank` = 'serwis'", connection);
-            DataTable table = new DataTable("Users");
-            listserv.Fill(table);
-            toolStripComboBox1.ComboBox.DataSource = new BindingSource(listserv, "hehe");
-            toolStripComboBox1.ComboBox.DisplayMember = "ID";*/
-        }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -61,30 +45,15 @@ namespace TeleManDesktop
         {
             if (tabControl1.SelectedTab.Text == "New")
             {
-                MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT ID, Description, CreateDate, Location, Destination FROM Orders WHERE State = 'waiting' AND ModificationDate IS NULL", connection);
-                DataSet dataset = new DataSet();
-                dataadapter.Fill(dataset, "Orders");
-                dataGridView1.DataSource = dataset;
-                dataGridView1.DataMember = "Orders";
-                dataGridView1.Focus();
+                populateNew();
             }
             if (tabControl1.SelectedTab.Text == "In progress")
             {
-                MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT Orders.ID, Association.UserID, State, Description, CreateDate, ModificationDate, Location, Destination FROM `Orders`, `Association` WHERE Orders.ID=OrderID AND State != 'success' AND State != 'failed'", connection);
-                DataSet dataset = new DataSet();
-                dataadapter.Fill(dataset, "Orders");
-                dataGridView2.DataSource = dataset;
-                dataGridView2.DataMember = "Orders";
-                dataGridView2.Focus();
+                populateOngoing();
             }
             if (tabControl1.SelectedTab.Text == "History")
             {
-                MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT ID, Description, Location, Destination, CreateDate, FinishDate FROM Orders WHERE State = 'success' OR State = 'failed'", connection);
-                DataSet dataset = new DataSet();
-                dataadapter.Fill(dataset, "Orders");
-                dataGridView4.DataSource = dataset;
-                dataGridView4.DataMember = "Orders";
-                dataGridView4.Focus();
+                populateHistory();
             }
         }
 
@@ -110,17 +79,28 @@ namespace TeleManDesktop
                 cmd.ExecuteNonQuery();
 
                 MessageBox.Show("Order assigned");
-                MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT ID, Description, CreateDate, Location, Destination FROM Orders WHERE State = 'waiting' AND ModificationDate IS NULL", connection);
-                DataSet dataset = new DataSet();
-                dataadapter.Fill(dataset, "Orders");
-                dataGridView1.DataSource = dataset;
-                dataGridView1.DataMember = "Orders";
-                dataGridView1.Focus();
+                populateNew();
             }
         }
 
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            populateNew();
+        }
+
+        private void refreshToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            populateOngoing();
+        }
+
+        private void refreshToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            populateHistory();
+        }
+
+        private void populateNew()
+        {
+            if (connection.State == ConnectionState.Closed) connection.Open();
             MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT ID, Description, CreateDate, Location, Destination FROM Orders WHERE State = 'waiting' AND ModificationDate IS NULL", connection);
             DataSet dataset = new DataSet();
             dataadapter.Fill(dataset, "Orders");
@@ -129,8 +109,9 @@ namespace TeleManDesktop
             dataGridView1.Focus();
         }
 
-        private void refreshToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void populateOngoing()
         {
+            if (connection.State == ConnectionState.Closed) connection.Open();
             MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT Orders.ID, Association.UserID, State, Description, CreateDate, ModificationDate, Location, Destination FROM `Orders`, `Association` WHERE Orders.ID=OrderID AND State != 'success' AND State != 'failed'", connection);
             DataSet dataset = new DataSet();
             dataadapter.Fill(dataset, "Orders");
@@ -139,8 +120,9 @@ namespace TeleManDesktop
             dataGridView2.Focus();
         }
 
-        private void refreshToolStripMenuItem3_Click(object sender, EventArgs e)
+        private void populateHistory()
         {
+            if (connection.State == ConnectionState.Closed) connection.Open();
             MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT ID, Description, Location, Destination, CreateDate, FinishDate FROM Orders WHERE State = 'success' OR State = 'failed'", connection);
             DataSet dataset = new DataSet();
             dataadapter.Fill(dataset, "Orders");

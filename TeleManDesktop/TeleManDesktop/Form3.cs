@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CryptSharp;
 using MySql.Data.MySqlClient;
 
 namespace TeleManDesktop
@@ -17,50 +18,24 @@ namespace TeleManDesktop
         {
             this.connection = connection;
             InitializeComponent();
-            listcars();
+            populateCars();
         }
 
         MySqlConnection connection;
-
-        private void listcars()
-        {
-            if (connection.State == ConnectionState.Closed) connection.Open();
-            MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT * FROM Cars", connection);
-            DataSet dataset = new DataSet();
-            dataadapter.Fill(dataset, "Cars");
-            dataGridView1.DataSource = dataset;
-            dataGridView1.DataMember = "Cars";
-            dataGridView1.Focus();
-        }
 
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
             if (tabControl1.SelectedTab.Text == "Cars")
             {
-                MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT * FROM Cars", connection);
-                DataSet dataset = new DataSet();
-                dataadapter.Fill(dataset, "Cars");
-                dataGridView1.DataSource = dataset;
-                dataGridView1.DataMember = "Cars";
-                dataGridView1.Focus();
+                populateCars();
             }
             if (tabControl1.SelectedTab.Text == "Garages")
             {
-                MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT * FROM Garage", connection);
-                DataSet dataset = new DataSet();
-                dataadapter.Fill(dataset, "Garage");
-                dataGridView2.DataSource = dataset;
-                dataGridView2.DataMember = "Garage";
-                dataGridView2.Focus();
+                populateGarage();
             }
             if (tabControl1.SelectedTab.Text == "Users")
             {
-                MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT ID, Login, Email, `Rank`, CarID FROM Users", connection);
-                DataSet dataset = new DataSet();
-                dataadapter.Fill(dataset, "Users");
-                dataGridView3.DataSource = dataset;
-                dataGridView3.DataMember = "Users";
-                dataGridView3.Focus();
+                populateUsers();
             }
         }
 
@@ -81,12 +56,7 @@ namespace TeleManDesktop
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT * FROM Cars", connection);
-            DataSet dataset = new DataSet();
-            dataadapter.Fill(dataset, "Cars");
-            dataGridView1.DataSource = dataset;
-            dataGridView1.DataMember = "Cars";
-            dataGridView1.Focus();
+            populateCars();
         }
 
         private void deleteUserToolStripMenuItem_Click(object sender, EventArgs e)
@@ -106,12 +76,7 @@ namespace TeleManDesktop
 
         private void refreshToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT * FROM Garage", connection);
-            DataSet dataset = new DataSet();
-            dataadapter.Fill(dataset, "Garage");
-            dataGridView2.DataSource = dataset;
-            dataGridView2.DataMember = "Garage";
-            dataGridView2.Focus();
+            populateGarage();
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
@@ -137,12 +102,7 @@ namespace TeleManDesktop
 
         private void toolStripMenuItem4_Click(object sender, EventArgs e)
         {
-            MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT * FROM Users", connection);
-            DataSet dataset = new DataSet();
-            dataadapter.Fill(dataset, "Users");
-            dataGridView3.DataSource = dataset;
-            dataGridView3.DataMember = "Users";
-            dataGridView3.Focus();
+            populateUsers();
         }
 
         private void Form3_Load(object sender, EventArgs e)
@@ -204,12 +164,7 @@ namespace TeleManDesktop
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Car added");
 
-                MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT * FROM Cars", connection);
-                DataSet dataset = new DataSet();
-                dataadapter.Fill(dataset, "Cars");
-                dataGridView1.DataSource = dataset;
-                dataGridView1.DataMember = "Cars";
-                dataGridView1.Focus();
+                populateCars();
 
                 int[] cid = new int[10];
                 MySqlCommand cmd3 = new MySqlCommand("SELECT ID FROM Cars", connection);
@@ -247,12 +202,7 @@ namespace TeleManDesktop
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Garage added");
 
-                MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT * FROM Garage", connection);
-                DataSet dataset = new DataSet();
-                dataadapter.Fill(dataset, "Garage");
-                dataGridView2.DataSource = dataset;
-                dataGridView2.DataMember = "Garage";
-                dataGridView2.Focus();
+                populateGarage();
 
                 comboBox2.Items.Clear();
                 int[] gid = new int[10];
@@ -278,18 +228,27 @@ namespace TeleManDesktop
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "" || textBox5.Text == "" || textBox6.Text == "" || textBox7.Text == "" || textBox8.Text == "" || comboBox1.Text == "" || comboBox3.Text == "")
+            if (textBox1.Text == "" || textBox2.Text == "" || textBox3.Text == "" || textBox4.Text == "" || textBox5.Text == "" || textBox6.Text == "" || textBox7.Text == "" || textBox8.Text == "" || comboBox1.Text == "")
             {
                 MessageBox.Show("Fields cannot be empty.");
             }
             else
             {
-                MySqlCommand cmd = new MySqlCommand("INSERT INTO Users(Login, Password, Email, Rank) VALUES(@Login, @Password, @Email, @Rank)", connection);
+                //string hpass = BCrypt.Net.BCrypt.HashPassword(textBox2.Text);
+                MySqlCommand cmd = new MySqlCommand("INSERT INTO Users(Login, Password, Email, `Rank`, CarID) VALUES(@Login, @Password, @Email, @Rank, @CarID)", connection);
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@Login", textBox1.Text);
-                cmd.Parameters.AddWithValue("@Password", textBox2.Text);
+                cmd.Parameters.AddWithValue("@Password", EasyEncryption.SHA.ComputeSHA256Hash(textBox2.Text));
                 cmd.Parameters.AddWithValue("@Email", textBox3.Text);
                 cmd.Parameters.AddWithValue("@Rank", comboBox1.Text);
+                if(comboBox3.Text == "")
+                {
+                    cmd.Parameters.AddWithValue("@CarID", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@CarID", comboBox3.Text);
+                }
                 cmd.ExecuteNonQuery();
 
                 int userid = 0;
@@ -319,13 +278,104 @@ namespace TeleManDesktop
                 cmd3.ExecuteNonQuery();
                 MessageBox.Show("User created");
 
-                MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT * FROM Users", connection);
-                DataSet dataset = new DataSet();
-                dataadapter.Fill(dataset, "Users");
-                dataGridView3.DataSource = dataset;
-                dataGridView3.DataMember = "Users";
-                dataGridView3.Focus();
+                populateUsers();
             }
+        }
+
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView1.CurrentRow != null)
+            {
+                if (connection.State == ConnectionState.Closed) connection.Open();
+                foreach (DataGridViewRow r in dataGridView1.SelectedRows)
+                {
+                    DataGridViewRow dgvRow = dataGridView1.CurrentRow;
+                    MySqlCommand cmd = new MySqlCommand("UPDATE Cars SET RegistrationNumber=@RegNo, Brand=@Brand, Model=@Model, GarageID=@GarageID WHERE ID=@ID", connection);
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@ID", r.Cells[0].Value);
+                    cmd.Parameters.AddWithValue("@RegNo", dgvRow.Cells[1].Value.ToString());
+                    cmd.Parameters.AddWithValue("@Brand", dgvRow.Cells[2].Value.ToString());
+                    cmd.Parameters.AddWithValue("@Model", dgvRow.Cells[3].Value.ToString());
+                    cmd.Parameters.AddWithValue("@GarageID", Convert.ToInt32(dgvRow.Cells[4].Value.ToString()));
+                    cmd.ExecuteNonQuery();
+
+                    populateCars();
+                }
+            }
+        }
+
+        private void dataGridView2_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView2.CurrentRow != null)
+            {
+                if (connection.State == ConnectionState.Closed) connection.Open();
+                foreach (DataGridViewRow r in dataGridView2.SelectedRows)
+                {
+                    DataGridViewRow dgvRow = dataGridView2.CurrentRow;
+                    MySqlCommand cmd = new MySqlCommand("UPDATE Garage SET Location=@Location WHERE ID=@ID", connection);
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@ID", r.Cells[0].Value);
+                    cmd.Parameters.AddWithValue("@Location", dgvRow.Cells[1].Value.ToString());
+                    cmd.ExecuteNonQuery();
+
+                    populateGarage();
+                }
+            }
+        }
+
+        private void dataGridView3_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView3.CurrentRow != null)
+            {
+                if (connection.State == ConnectionState.Closed) connection.Open();
+                foreach (DataGridViewRow r in dataGridView3.SelectedRows)
+                {
+                    DataGridViewRow dgvRow = dataGridView3.CurrentRow;
+                    MySqlCommand cmd = new MySqlCommand("UPDATE Users SET Login=@Login, Email=@Email, `Rank`=@Rank, CarID=@CarID WHERE ID=@ID", connection);
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@ID", r.Cells[0].Value);
+                    cmd.Parameters.AddWithValue("@Login", dgvRow.Cells[1].Value.ToString());
+                    cmd.Parameters.AddWithValue("@Email", dgvRow.Cells[2].Value.ToString());
+                    cmd.Parameters.AddWithValue("@Rank", dgvRow.Cells[3].Value.ToString());
+                    cmd.Parameters.AddWithValue("@CarID", Convert.ToInt32(dgvRow.Cells[4].Value == DBNull.Value ? "0" : dgvRow.Cells[4].Value.ToString()));
+                    cmd.ExecuteNonQuery();
+
+                    populateUsers();
+                }
+            }
+        }
+
+        private void populateUsers()
+        {
+            if (connection.State == ConnectionState.Closed) connection.Open();
+            MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT ID, Login, Email, `Rank`, CarID FROM Users", connection);
+            DataSet dataset = new DataSet();
+            dataadapter.Fill(dataset, "Users");
+            dataGridView3.DataSource = dataset;
+            dataGridView3.DataMember = "Users";
+            dataGridView3.Focus();
+        }
+
+        private void populateCars()
+        {
+            if (connection.State == ConnectionState.Closed) connection.Open();
+            MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT * FROM Cars", connection);
+            DataSet dataset = new DataSet();
+            dataadapter.Fill(dataset, "Cars");
+            dataGridView1.DataSource = dataset;
+            dataGridView1.DataMember = "Cars";
+            dataGridView1.Focus();
+        }
+
+        private void populateGarage()
+        {
+            if (connection.State == ConnectionState.Closed) connection.Open();
+            MySqlDataAdapter dataadapter = new MySqlDataAdapter("SELECT * FROM Garage", connection);
+            DataSet dataset = new DataSet();
+            dataadapter.Fill(dataset, "Garage");
+            dataGridView2.DataSource = dataset;
+            dataGridView2.DataMember = "Garage";
+            dataGridView2.Focus();
         }
     }
 }

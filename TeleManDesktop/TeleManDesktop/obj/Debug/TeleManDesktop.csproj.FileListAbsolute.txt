@@ -17,3 +17,9 @@ C:\Users\Next\Desktop\zespołowy\TeleManDesktop\TeleManDesktop\obj\Debug\TeleMan
 C:\Users\Next\Desktop\zespołowy\TeleManDesktop\TeleManDesktop\obj\Debug\TeleManDesktop.Form2.resources
 C:\Users\Next\Desktop\zespołowy\TeleManDesktop\TeleManDesktop\obj\Debug\TeleManDesktop.Form3.resources
 C:\Users\Next\Desktop\zespołowy\TeleManDesktop\TeleManDesktop\obj\Debug\TeleManDesktop.Form4.resources
+C:\Users\Next\Desktop\zespołowy\TeleManDesktop\TeleManDesktop\bin\Debug\BCrypt.Net-Next.dll
+C:\Users\Next\Desktop\zespołowy\TeleManDesktop\TeleManDesktop\bin\Debug\BCrypt.Net-Next.xml
+C:\Users\Next\Desktop\zespołowy\TeleManDesktop\TeleManDesktop\bin\Debug\CryptSharp.dll
+C:\Users\Next\Desktop\zespołowy\TeleManDesktop\TeleManDesktop\bin\Debug\CryptSharp.pdb
+C:\Users\Next\Desktop\zespołowy\TeleManDesktop\TeleManDesktop\bin\Debug\CryptSharp.xml
+C:\Users\Next\Desktop\zespołowy\TeleManDesktop\TeleManDesktop\bin\Debug\EasyEncryption.dll

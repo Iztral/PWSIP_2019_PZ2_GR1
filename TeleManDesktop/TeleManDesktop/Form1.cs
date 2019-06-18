@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using CryptSharp;
 
 namespace TeleManDesktop
 {
@@ -30,14 +31,16 @@ namespace TeleManDesktop
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string passhash = EasyEncryption.SHA.ComputeSHA256Hash(textBox2.Text);
+            //MessageBox.Show(passhash);
 
             string r = null;
+            string p = null;
 
             if (connection.State == ConnectionState.Closed) connection.Open();
-            MySqlCommand cmd = new MySqlCommand("SELECT Rank FROM Users WHERE Login=@USERNAME AND Password=@PASSWORD", connection);
+            MySqlCommand cmd = new MySqlCommand("SELECT Rank, Password FROM Users WHERE Login=@USERNAME", connection);
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@USERNAME", textBox1.Text);
-            cmd.Parameters.AddWithValue("@PASSWORD", textBox2.Text);
 
             MySqlDataReader rdr = null;
 
@@ -47,17 +50,18 @@ namespace TeleManDesktop
                 while (rdr.Read())
                 {
                     r = rdr[0].ToString();
-                    if (r != null) break;
+                    p = rdr[1].ToString();
+                    if (r != null && p != null) break;
                 }
             }
             if (rdr != null) rdr.Close();
 
-            if (r == "admin" || r == "root")
+            if (p == passhash && r == "admin" || r == "root")
             {
                 new Form3(connection).ShowDialog();
                 textBox2.Text = "";
             }
-            else if (r == "dispatcher")
+            else if (p == passhash && r == "dispatcher")
             {
                 new Form2(connection).ShowDialog();
                 textBox2.Text = "";
