@@ -3,6 +3,11 @@ Projekt zespołowy 2
 
 ||Aplikacja desktopowa(C# Forms)||
 
+v1.4[FINAL]
+-dodano szyfrowanie haseł(SHA256)
+-możliwość edycji komórek w Panelu Admina
+-poprawki błędów
+
 v1.31
 -poprawka krytycznego przeoczenia
 
